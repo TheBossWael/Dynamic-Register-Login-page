@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>login</title>
+	<link rel="stylesheet" type="text/css" href="stylelogin.css">
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="login.js">
+
+</head>
+<body>
+    
+    <div class="container">  
+
+        <div class="login-wrapper">
+            <form id="loginForm" action="">
+                <h1> Sign In </h1>
+
+                <div class="icons">
+                    <a href=""><i class='bx bxl-facebook-circle'></i></a>
+
+                    <a href=""><i class='bx bxl-google' ></i></a>
+                    <a href=""><i class='bx bxl-linkedin'></i></i></a>
+                </div>
+
+                <p>or use Name and Password</p>
+
+                <div class="input-box">
+                    <input type="text" placeholder="username" required>
+                    <i class='bx bx-user'></i>
+                </div>
+
+                <div class="input-box">
+                    <input type="password" placeholder="password" required>
+                    <i class='bx bxs-lock-alt'></i>
+                </div>
+
+                    <div class="forgotpass">
+                    <a href="#"> forgot password? </a>
+                    </div>
+                <button type="submit" class="btn"> login </button>
+            </form>
+        </div>
+
+        <div class="register-wrapper">
+                <h1> Create Account </h1>
+
+                <div class="choiseRegister">
+                    <p id="p">Register as</p>
+                    <br>
+                    <button id="button1" onclick="condidatRegisterBtn()" >looking for a Job</button>
+                    <button id="button2" onclick="recruterRegisterBtn()" >Recruter</button>
+                  </div>
+
+                <div class="condidatRegister">
+
+                    <form id="condidatRegForm">
+                        <br><br>
+                        <!-- One "tab" for each step in the form: -->
+                        <div class="registerTab">
+                          <p>name:</p>
+                          <input placeholder="Enter full name" oninput="this.className = ''" name="name">
+            
+                          <p>Job Title:</p>
+                          <input placeholder="exp:Developer,Designer,Marketer.." oninput="this.className = ''" name="Job">
+                        </div>
+            
+                        <div class="registerTab">
+                          <p>contact info:</p>
+                          <br>
+                          <input type="email" placeholder="E-mail..." oninput="this.className = ''" name="email">
+                          <br><br>
+                          <input type="number" placeholder="Phone..." oninput="this.className = ''" name="phone">
+                        </div>
+            
+                        <div class="registerTab">
+                          <p>Password:</p>
+                          <br>
+                          <input placeholder="password..." oninput="this.className = ''" name="pwrd" type="password">
+                          <br><br>
+                          <input placeholder="confirm password..." oninput="this.className = ''" name="Conf-pwrd" type="password">
+                        </div>
+            
+                        <div class="registerTab">
+                           <p>About you:</p>
+                           <textarea id="about-you" name="about-you" rows="4" cols="50" placeholder="Tell us about yourself..."></textarea>
+                           
+                        </div>
+            
+                        <div class="registerTab">
+                            
+                            <p>upload your photo:</p>
+                            <label for="user-photo" class="fileinput">upload here</label>
+                           <input type="file" id="user-photo" name="user-photo" accept="image/*"> 
+            
+                           <p>upload your cv:</p>
+                           <label for="user-cv" class="fileinput">upload here</label>
+                           <input type="file" id="user-cv" name="user-cv" accept=".pdf"> 
+            
+                        </div>
+            
+                          <div class="nextprevbtns">
+                            <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                            <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                          </div>
+            
+            
+                      </form>
+                </div>
+
+
+                <div class="recruterRegister">
+                <form id="rectRegForm" action="">
+                    <p>name:</p>
+                    <input placeholder="Enter full name" name="name">
+                    
+
+                    <p>Password:</p>
+                    <input placeholder="password..." name="pwrd" type="password">
+                    <br>
+                    <input placeholder="confirm password..." name="Conf-pwrd" type="password">
+
+                    <p>company:</p>
+                    <input placeholder="company name" name="companyName">
+
+                    <button type="submit" class="btn"> Register </button>
+                </form>
+
+                </div>
+
+        </div>
+
+        <div class="bluefont-wrapper-login">
+            <h1>Welcome!</h1>
+            <p>register with your personal details to use <br>all of our platform features</p>
+            <br>
+            <button onclick="translateToRegister()" class="translateButton"> register </button>
+       </div>
+            
+        <div class="bluefont-wrapper-register">
+            <h1>Welcome Back!</h1>
+            <p>enter yout personal details to use <br>all of our platform features</p>
+            <br>
+            <button onclick="translateToLogin()" class="translateButton"> Sign In </button>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+
+
+<script>
+//=============================================================//
+//get page elements
+const choiseRegister=document.getElementsByClassName("choiseRegister")[0]
+const login = document.getElementsByClassName("login-wrapper")[0]; 
+const register = document.getElementsByClassName("register-wrapper")[0]; 
+const bluefontRegister = document.getElementsByClassName("bluefont-wrapper-register")[0]; 
+const bluefontLogin =document.getElementsByClassName("bluefont-wrapper-login")[0];
+const condidatRegForm=document.getElementById("condidatRegForm")
+const rectRegForm=document.getElementById("rectRegForm")
+//=============================================================//
+
+
+//=============================================================//
+ //functions to hide element
+ function hide(element) { 
+    element.style.display = "none"; 
+} 
+function hideClass(elementSelector) { 
+    document.querySelector(elementSelector).style.display = "none"; 
+}
+
+//functions to show element
+function show(element) { 
+    element.style.display = "block"; 
+} 
+
+function showClass(elementSelector) { 
+    document.querySelector(elementSelector).style.display = "block"; 
+}
+
+//function to desactivate css selector
+function Un_active(element){
+    document.querySelector(element).classList.remove('active'); 
+}
+//function to activate css selector
+function active(element){
+    document.querySelector(element).classList.add('active'); 
+}
+//=============================================================//
+
+//=============================================================//
+//       What will be shown when first page loads              //
+//=============================================================//
+
+//hide register and show sign in per default
+hide(bluefontRegister); 
+
+        show(login); 
+        hide(register);
+        show(bluefontLogin);
+        hide(bluefontRegister); 
+        //always hide all register elements before choise
+        hideClass('.nextprevbtns')
+
+//=============================================================//
+//                      buttons actions                        //
+//=============================================================//
+
+function translateToRegister() {
+        hide(login); 
+        show(register)
+        hide(bluefontLogin);
+        show(bluefontRegister); 
+    }
+ 
+function translateToLogin() {
+
+        //show login_form
+        show(login)
+        show(bluefontLogin); 
+
+        //hide reg_form
+        hide(register); 
+        hide(bluefontRegister)
+        Un_active('.register-wrapper h1')
+        show(choiseRegister)
+        hideClass('.registerTab')
+        hideClass('.nextprevbtns')
+        hide(x[current_tab])        
+        hideClass('.recruterRegister')
+        //reset form
+        condidatRegForm.reset();
+        rectRegForm.reset();
+
+    }
+ 
+function condidatRegisterBtn(){
+
+        active('.register-wrapper h1')
+        hide(choiseRegister)
+        //reset form
+        current_tab=0;
+        condidatRegForm.reset();
+       //shows the first tab of Condidat-register form 
+       showTab(current_tab); 
+}
+
+function recruterRegisterBtn(){
+        active('.register-wrapper h1')
+        hide(choiseRegister)
+        showClass('.recruterRegister');
+}
+//=============================================================//
+
+
+//==========================================================//
+//                       Register steps                     //
+//==========================================================//
+    //setup variables
+var x=document.getElementsByClassName("registerTab");
+var current_tab=0;
+
+function showTab(n){
+
+    //showTab
+    show(x[n])
+
+    // btns control
+    //prevbtn:
+    if (n==0){
+        //shows nextBtn at first tab and prevBtn at the others
+        hide(prevBtn)
+        showClass('.nextprevbtns')
+    }
+    else{
+        document.getElementById("prevBtn").style.display="inline"
+    }
+    //nextbtn:
+    if(n==x.length-1){
+        document.getElementById("nextBtn").innerHTML="submit"
+    }
+    else{
+        document.getElementById("nextBtn").innerHTML="next"
+    }
+
+}
+
+function nextPrev(n){
+
+    //nextBtn
+     if (n==1 && !valideForm()){
+         return false;
+     }
+
+    //hide currentTab 
+       hide(x[current_tab])
+    //increase or decrease tab nbr
+       current_tab+=n
+
+    //submit
+    if (current_tab==x.length){
+        condidatRegForm.submit();
+        return false
+    }
+    //else shows new tab
+    showTab(current_tab);
+}
+function valideForm() {
+    var y, i, valid = true;
+    y = x[current_tab].getElementsByTagName("input");
+    z = x[current_tab].getElementsByTagName("label");
+
+    // A loop that checks every input field in the current tab:
+    for (i = 0; i < y.length; i++) {
+        // If a field is empty...
+        if (y[i].value.trim() === "") { 
+            // add an "invalid" class to the field:
+            y[i].className += " invalid";
+            // and set the current valid status to false
+            valid = false;
+        } else {
+            // If the field is not empty, remove the "invalid" class if present
+            y[i].className = y[i].className.replace(" invalid", "");
+
+        }
+    }
+    return valid; // return the valid status
+}
+
+
+//=============================================================//
+
+</script>
